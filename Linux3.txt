@@ -1,0 +1,16 @@
+Операционные системы и виртуализация (Linux). Обучение в записи
+Урок 8. Семинар: Подключение сторонних репозиториев, ручная установка пакетов
+Задание:
+Подключить репозиторий с nginx любым удобным способом, установить nginx и потом удалить nginx, используя утилиту dpkg.
+Установить пакет на свой выбор, используя snap.
+* Создать с помощью nano файл test.txt. Настроить автоматический бэкап этого файла раз в 10 минут в файл с названием test.txt.bak с использованием cron. #### Решение присылаем в виде текста использованных команд (можно без результатов вывода). Без скриншотов! #### Задачи со звездочкой (*) необязательные, дополнительные.
+
+Решение:
+echo "deb http://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
+curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
+sudo apt update
+sudo apt install nginx
+sudo dpkg -r nginx
+sudo snap install vlc
+nano test.txt
+(crontab -l 2>/dev/null; echo "*/10 * * * * cp /home/to/test.txt /home/to/test.txt.bak") | crontab -
